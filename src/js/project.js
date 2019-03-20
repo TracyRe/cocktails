@@ -17,6 +17,7 @@ export class DrinkDetails {
 }
 
 export class DrinkList {
+
   getDrinkList(ingr) {
     return new Promise(function(resolve, reject) {
       let request = new XMLHttpRequest();
@@ -31,5 +32,12 @@ export class DrinkList {
       request.open("GET", url, true);
       request.send();
     });
+  }
+  getList(drinks) {
+    const cocktails = [];
+    for(let i = 0; i < drinks.length; i ++) {
+      cocktails.push(drinks[i].strDrink);
+    }
+    return cocktails;
   }
 }
