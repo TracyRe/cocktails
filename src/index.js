@@ -1,21 +1,25 @@
 // import './css/styles.css'; // Should not need this if compiling sass
 import $ from 'jquery';
 import './scss/styles.scss';
-import { addToTen } from './js/project.js';
+import { DrinkDetails } from './js/project.js';
 
 $(document).ready(function(){
-  $("#adder").submit(function(event) {
-    event.preventDefault();
-    const num1 = parseInt($("#num1").val());
-    const num2 = parseInt($("#num2").val());
-    let result = addToTen(num1,num2);
-    console.log(result);
-    let answer = "";
-    if (result === true) {
-      answer = "";
-    } else {
-      answer = "do not ";
-    }
-    $(".result").html(`<p>${num1} and ${num2} ${answer}add up to 10.</p>`);
-  });
+  // const drinkName = "Margarita";
+  //
+  // let drinkDetails = new DrinkDetails();
+  // let promise = drinkDetails.getDrinkDetails(drinkName);
+  //
+  // let id;
+  // console.log(drinkDetails);
+  // console.log(promise);
+  //
+  // promise.then(function(response) {
+  //   console.log("word2");
+  //   let body = JSON.parse(response);
+  //   id = body.drinks[0].idDrink;
+  // });
+  // setTimeout(() => {
+  //   console.log(id);
+  // }, 1000)
+
 });
