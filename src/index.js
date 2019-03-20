@@ -5,7 +5,7 @@ import { DrinkDetails, DrinkList } from './js/project.js';
 
 $(document).ready(function(){
 
-  const alcohols = ["Absinthe", "Amaretto", "Beer", "Blended whiskey", "Bourbon", "Brandy", "Campari", "Cider", "Cognac", "Cointreau", "Crown Royal", "Dark rum", "Gin", "Green Chartreuse", "Irish cream", "Irish whiskey", "Jägermeister", "Kahlua", "Light rum", "Mezcal", "Ouzo", "Pisco", "Port", "Prosecco", "Rum", "Rye whiskey", "Sambuca", "Scotch", "Blended Scotch", "Sloe gin", "Spiced rum", "Tequila", "Vodka", "Whiskey", "Whisky"];
+  const alcohols = ["Absinthe", "Beer", "Blended whiskey", "Bourbon", "Brandy", "Campari", "Cider", "Cognac", "Cointreau", "Crown Royal", "Dark rum", "Gin", "Green Chartreuse", "Irish cream", "Irish whiskey", "Jägermeister", "Kahlua", "Light rum", "Mezcal", "Ouzo", "Pisco", "Port", "Prosecco", "Rum", "Rye whiskey", "Sambuca", "Scotch", "Blended Scotch", "Sloe gin", "Spiced rum", "Tequila", "Vodka", "Whiskey", "Whisky"];
 
   for(let j = 0; j < alcohols.length; j ++) {
     $("#alcohol-list").append(`<option value="${alcohols[j]}">${alcohols[j]}</option>`)
@@ -53,10 +53,17 @@ $(document).ready(function(){
       $(".drink-image").html(`<img src=${image}>`);
       $(".drink-instructions").text(instructions);
 
+      const drinkIngredients = [];
       for (let k = 1; k < 16; k++) {
-        let ingred = body.drinks[0].strIngredient[k];
+        let spot = `strIngredient${k}`;
+        let ingred = body.drinks[0].spot;
         console.log(ingred);
+        if (ingred.length > 0) {
+          drinkIngredients.push(ingred);
+        }
       }
+
+
     });
 
   });
