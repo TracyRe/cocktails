@@ -1,41 +1,182 @@
+
 // VARIABLES
 
-$basefont: Helvetica, Arial, sans-serif;
+$basefont: 'Barlow Semi Condensed', Helvetica, sans-serif;
+$fancyfont: 'Sail', cursive;
+$textcolor: darkent(#5b1146, 80%);
+$accent: #0FB2D3;
+$accent2: #D1ECE5;
+$bgcolor-page: #5b1146;
+$bgcolor-gradient: #fcdb6f;
+$bgcolor-nav: #ffffff;
+$bgcolor-button: #00839C; // A darker shade of accent
+$text-button: #ffffff;
+$box-shadow: 2px 2px 4px rgba(150, 150, 150, .5);
+
+
+
+
+// MIXINS
+
+@mixin border($size, $color) {
+  border: $size solid $color;
+}
+
+@mixin cushion($padding, $margin) {
+  padding: $padding;
+  margin: $margin;
+}
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin min-max-width($min-width, $max-width) {
+  min-width: $min-width;
+  max-width: $max-width;
+}
+
+
+@mixin tablet {
+  @media screen and (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin tablet-landscape {
+  @media screen and (min-width: 900px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+
+// styles
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  // @include border(1px, #f0f);  // Troubleshooting
+}
+
+html {
+  font-size: 16px;
+  @include tablet {
+    font-size: 21px;
+  }
+  @include desktop {
+    font-size: 20px;
+  }
+}
 
 body {
-  font:
-  {
+  width: 100%;
+  background-color: $bgcolor-page;
+  color: $textcolor;
+  font: {
     family: $basefont;
-    size: 18px;
+    weight: 300;
   }
-  height: 100vh;
-  background: linear-gradient(30deg, #b3cecd, #ecefe1);
+  height: 100%;
+}
+
+.container {
+  @include size(100%, 100%);
+  @include cushion(0,0);
+  background-image: linear-gradient($bgcolor-gradient, $bgcolor-page);
 }
 
 h1, h2 {
-  font-weight: normal;
-  margin: 1rem 0 .5rem 0;
-  color: #242828;
+  font-family: $fancyfont;
+  margin: 0 0 .5rem 0;
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 6rem;
+  color: $bgcolor-page;
+  text-align: center;
+  text-shadow: 2px 2px 6px lighten($bgcolor-gradient, 20%);
 }
 
 h2 {
-  font-size: 2rem;
+  color: $bgcolor-page;
+  font-size: 4rem;
 }
 
-p {
+p, select {
   font-size: 1rem;
-  margin: .5rem 0 .5rem 0;
+  margin: 0 0 1rem 0;
   color: #333;
   line-height: 140%;
 }
 
-.container {
-  width: 80%;
-  max-width: 1000px;
-  min-width: 400px;
-  margin: 2rem auto 1rem auto;
+
+.content {
+  @include cushion(1rem 0, 0 auto 1rem auto);
+  @include size(70%, 100%);
+  @include min-max-width(400px, 1000px);
+}
+
+
+a {
+  color: $accent;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color: lighten($accent, 10%);
+}
+
+
+button {
+  // @include size(150px, auto);
+  @include cushion(.25rem 1rem, .5rem auto .5rem auto);
+  background: $bgcolor-button;
+  border-radius: 6px;
+  border: 0;
+  color: $text-button;
+  font-size: 1rem;
+  font-weight: 200;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 6px $bgcolor-page;
+}
+
+ul {
+  margin-left: 2rem;
+  li {
+    list-style: disc;
+
+  }
+}
+
+.image {
+  img {
+    width: 100%;
+    margin: 2rem 0 1rem 0;
+  }
+}
+
+img {
+  @include size(100%, auto);
+  margin-bottom: 1rem;
+}
+
+.drink-result {
+  @include cushion(.25rem 1rem 1rem 1rem, 2rem 0);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .45);
+  box-shadow: 0 0 30px #fff;
+  // display: none;
+}
+
+p.drink-instructions {
+  font-size: 1.2rem;
 }

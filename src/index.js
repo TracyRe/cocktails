@@ -52,16 +52,17 @@ $(document).ready(function(){
       $(".drink-name").text(name);
       $(".drink-image").html(`<img src=${image}>`);
       $(".drink-instructions").text(instructions);
+      $(".drink-results").show();
 
-      const drinkIngredients = [];
-      for (let k = 1; k < 16; k++) {
-        let spot = `strIngredient${k}`;
-        let ingred = body.drinks[0].spot;
-        console.log(ingred);
-        if (ingred.length > 0) {
-          drinkIngredients.push(ingred);
-        }
-      }
+      // const drinkIngredients = [];
+      // for (let k = 1; k < 16; k++) {
+      //   let spot = `strIngredient${k}`;
+      //   let ingred = body.drinks[0].spot;
+      //   console.log(ingred);
+      //   if (ingred.length > 0) {
+      //     drinkIngredients.push(ingred);
+      //   }
+      // }
 
 
     });
