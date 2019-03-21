@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:300,400,400i,500,600|Sail" rel="stylesheet">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cocktails</title>
   </head>
   <body>
     <div class="container">
-      <h1>Cocktails</h1>
-      <form id="alcohol" class="form" >
-        <select id="alcohol-list" name="">
-          <option value="">CHOOSE YOUR POISON  --</option>
-        </select>
-        <button type="submit" name="button">Submit</button>
-      </form>
-      <form id="cocktails" class="form">
-        <select id="cocktail-list" name="">
-          <option value="">CHOOSE A DRINK --</option>
-        </select>
-        <button type="submit" name="button">Submit</button>
-      </form>
+      <div class="content">
 
-      <div class="drink-result">
-        <h2 class="drink-name"></h2>
-        <div class="drink-image"></div>
-        <ul class="drink-ingredients"></ul>
-        <div class="drink-instructions"></div>
+        <h1>Cocktails</h1>
+        <form id="alcohol" class="form" >
+          <select id="alcohol-list" name="">
+            <option value="">CHOOSE YOUR POISON  --</option>
+          </select>
+          <button type="submit" name="button">Submit</button>
+        </form>
+        <form id="cocktails" class="form">
+          <select id="cocktail-list" name="">
+            <option value="">CHOOSE A DRINK --</option>
+          </select>
+          <button type="submit" name="button">Submit</button>
+        </form>
+
+        <div class="drink-result">
+          <h2 class="drink-name"></h2>
+          <div class="drink-image"></div>
+          <ul class="drink-ingredients"></ul>
+          <div><p class="drink-instructions"></p></div>
+        </div>
       </div>
     </div>
   </body>
