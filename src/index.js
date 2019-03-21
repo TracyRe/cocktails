@@ -18,6 +18,8 @@ $(document).ready(function(){
   let cocktailList;
   let nonAlcoholList;
 
+  // ********** CHOOSE ALCOHOL SELECTION ***************
+
   $("#alcohol-list").change(() => {
     clearDetails();
     $("#cocktail-list").html("<option value=''>-- CHOOSE A DRINK --</option>");
@@ -34,39 +36,40 @@ $(document).ready(function(){
       cocktailList.forEach( (drink) => {
         $("#cocktail-list").append(`<option value="${drink}">${drink}</option>`)
       });
-      $("#specific-surprise").html('<button id="alc" type="button" name="button"></button>');
-      $("#alc").text(`Or, Random ${ingr} drink`);
-      $("#alc").click(() => {
-        console.log(cocktailList);
-        getSpecifics(cocktailList[Math.floor(Math.random()*cocktailList.length)]);
-      });
+    });
+    $("#specific-surprise").html('<button id="alc" type="button" name="button"></button>');
+    $("#alc").text(`Or, Random ${ingr} drink`);
+    $("#alc").click(() => {
+      console.log(cocktailList);
+      getSpecifics(cocktailList[Math.floor(Math.random()*cocktailList.length)]);
     });
   });
 
-
+// ********** NON ALCOHOL BUTTON ***************
   $("#non-alcoholic-list").click(() => {
     clearDetails();
     $("#specific-surprise").empty();
-    $("#cocktail-list").html("<option value=''>CHOOSE A DRINK --</option>");
+    $("#alcohol-list").val("default");
+    $("#cocktail-list").html("<option value=''>-- CHOOSE A DRINK --</option>");
     $(".cocktail-list").show();
     let nonAlcList = new NonAlcoholicList();
     let promise3 = nonAlcList.getNonAlcoholicList();
 
     promise3.then((response) => {
       let body = JSON.parse(response);
-      const nonAlcoholList = nonAlcList.getList(body.drinks);
+      nonAlcoholList = nonAlcList.getList(body.drinks);
       nonAlcoholList.forEach( (drink) => {
         $("#cocktail-list").append(`<option value="${drink}">${drink}</option>`)
       });
-      $("#specific-surprise").html('<button id="non-alc" type="button" name="button">Or, Random Non-Alcoholic Drink</button>');
-      $("#non-alc").click(() => {
-        console.log(nonAlcoholList);
-        getSpecifics(nonAlcoholList[Math.floor(Math.random()*nonAlcoholList.length)]);
-      });
+    });
+    $("#specific-surprise").html('<button id="non-alc" type="button" name="button">Or, Random Non-Alcoholic Drink</button>');
+    $("#non-alc").click(() => {
+      console.log(nonAlcoholList);
+      getSpecifics(nonAlcoholList[Math.floor(Math.random()*nonAlcoholList.length)]);
     });
   });
 
-
+// ********** CHOOSE DRINK SELECTION ***************
   $("#cocktail-list").change((event) => {
     event.preventDefault();
     clearDetails();

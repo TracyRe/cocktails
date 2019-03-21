@@ -90,16 +90,31 @@ body {
   background-image: linear-gradient($bgcolor-gradient, $bgcolor-page);
 }
 
+.content {
+  @include cushion(.5rem 0, 0 auto 1rem auto);
+  @include size(70%, 100%);
+  @include min-max-width(280px, 1000px);
+  @include tablet {
+    @include cushion(1rem 0, 0 auto 1rem auto);
+  };
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 h1, h2 {
   font-family: $fancyfont;
   margin: 0 0 .5rem 0;
 }
 
 h1 {
-  font-size: 5rem;
+  font-size: 3rem;
   color: $bgcolor-page;
   text-align: center;
   text-shadow: 2px 2px 0px lighten($bgcolor-gradient, 20%);
+  @include tablet {
+    font-size: 5rem;
+  };
   @include desktop {
     margin: 0 0 2rem 0;
   };
@@ -107,8 +122,11 @@ h1 {
 
 h2 {
   color: $bgcolor-page;
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 95%;
+  @include tablet {
+    font-size: 3rem;
+  };
 }
 
 p, select, option {
@@ -130,15 +148,6 @@ select {
 
 }
 
-
-.content {
-  @include cushion(1rem 0, 0 auto 1rem auto);
-  @include size(70%, 100%);
-  @include min-max-width(280px, 1000px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 
 a {
@@ -210,7 +219,7 @@ ul {
 
 
 .drink-result {
-  @include cushion(.25rem 1rem 0rem 1rem, 2rem 0);
+  @include cushion(.25rem 1rem 0rem 1rem, 2rem 0 0 0);
   border-radius: 8px;
   background: rgba(255, 255, 255, .45);
   box-shadow: 0 0 30px #fff;
