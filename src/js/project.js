@@ -17,7 +17,6 @@ export class DrinkDetails {
 }
 
 export class DrinkList {
-
   getDrinkList(ingr) {
     return new Promise(function(resolve, reject) {
       let request = new XMLHttpRequest();
@@ -33,11 +32,36 @@ export class DrinkList {
       request.send();
     });
   }
-  getList(drinks) {
+  getList(drink) {
     const cocktails = [];
-    for(let i = 0; i < drinks.length; i ++) {
-      cocktails.push(drinks[i].strDrink);
-    }
+    drink.forEach((drink) => {
+      cocktails.push(drink.strDrink);
+    });
+    return cocktails;
+  }
+}
+
+export class NonAlcoholicList {
+  getNonAlcoholicList(name) {
+    return new Promise(function(resolve, reject) {
+      let request = new XMLHttpRequest();
+      let url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic`;
+      request.onload = function() {
+        if (this.status === 200) {
+          resolve(request.response);
+        } else {
+          reject(Error(request.statusText));
+        }
+      }
+      request.open("GET", url, true);
+      request.send();
+    });
+  }
+  getList(drink) {
+    const cocktails = [];
+    drink.forEach((drink) => {
+      cocktails.push(drink.strDrink);
+    });
     return cocktails;
   }
 }
