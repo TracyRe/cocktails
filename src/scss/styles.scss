@@ -116,13 +116,18 @@ p, select, option {
     family: $basefont;
     size: 1rem;
   }
-  margin: 0 0 1rem 0;
   color: #333;
+}
+
+p {
+  margin: 0 0 1rem 0;
   line-height: 140%;
 }
 
 select {
   @include border(1px, lighten($bgcolor-page, 40%));
+  margin: 0 0 .5rem 0;
+
 }
 
 
@@ -149,18 +154,20 @@ a:hover, a:active {
 button {
   // @include size(150px, auto);
   @include cushion(.25rem 1rem, .5rem auto .5rem auto);
+    font: {
+      family: $basefont;
+      size: 1rem;
+    }
   background: $bgcolor-button;
-  border-radius: 6px;
+  border-radius: 4px;
   border: 0;
   color: $text-button;
-  font-size: 1rem;
-  font-weight: 200;
   letter-spacing: .1rem;
   text-transform: uppercase;
   box-shadow: 1px 2px 4px $bgcolor-page;
 }
 #non-alcoholic-list {
-  font-size: 0.7rem;
+  // font-size: 0.7rem;
   margin: 0 0 2rem 0;
 }
 
@@ -182,9 +189,9 @@ ul {
     color: $reversecolor;
     margin-bottom: 0;
   }
-  select {
-    margin-bottom: 0;
-  }
+  // select {
+  //   margin-bottom: 0;
+  // }
   button {
     margin-top: 0;
   }

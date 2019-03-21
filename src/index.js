@@ -6,25 +6,7 @@ import { DrinkDetails, DrinkList, NonAlcoholicList } from './js/project.js';
 $(document).ready(function(){
   $(".cocktail-list").hide();
 
-  $("#non-alcoholic-list").click(() => {
-    clearDetails();
-    $("#cocktail-list").html("<option value=''>CHOOSE A DRINK --</option>");
-    $(".cocktail-list").show();
-    let nonAlcList = new NonAlcoholicList();
-    let promise3 = nonAlcList.getNonAlcoholicList();
 
-    promise3.then((response) => {
-      let body = JSON.parse(response);
-      const list = nonAlcList.getList(body.drinks);
-      list.forEach( (drink) => {
-        $("#cocktail-list").append(`<option value="${drink}">${drink}</option>`)
-      });
-      $("#specific-surprise").text(`Random Non-Alcoholic Drink`);
-      $("#specific-surprise").click(() => {
-        getSpecifics(list[Math.floor(Math.random()*list.length)]);
-      });
-    });
-  });
 
 
   const alcohols = ["Absinthe", "Beer", "Bourbon", "Brandy", "Campari", "Cider", "Cognac", "Cointreau", "Gin", "Sloe gin", "Green Chartreuse", "Irish cream", "Jägermeister", "Kahlua", "Mezcal", "Ouzo", "Pisco", "Port", "Prosecco", "Rum", "Dark rum", "Light rum", "Spiced rum", "Sambuca", "Scotch", "Blended Scotch", "Tequila", "Vodka", "Whiskey", "Whisky", "Irish whiskey", "Rye whiskey", "Blended whiskey", "Crown Royal"];
@@ -33,10 +15,14 @@ $(document).ready(function(){
     $("#alcohol-list").append(`<option value="${booze}">${booze}</option>`)
   });
 
+  let cocktailList;
+  let nonAlcoholList;
+
   $("#alcohol-list").change(() => {
     clearDetails();
-    $("#cocktail-list").html("<option value=''>CHOOSE A DRINK --</option>");
+    $("#cocktail-list").html("<option value=''>-- CHOOSE A DRINK --</option>");
     $(".cocktail-list").show();
+    // $("#specific-surprise").removeAttr('id');
 
     const ingr = $("#alcohol-list").val();
     let drinkList = new DrinkList();
@@ -44,19 +30,46 @@ $(document).ready(function(){
 
     promise2.then((response) => {
       let body = JSON.parse(response);
-      const list = drinkList.getList(body.drinks);
-      list.forEach( (drink) => {
+      cocktailList = drinkList.getList(body.drinks);
+      cocktailList.forEach( (drink) => {
         $("#cocktail-list").append(`<option value="${drink}">${drink}</option>`)
       });
-      $("#specific-surprise").text(`Random ${ingr} drink`);
-      $("#specific-surprise").click(() => {
-        getSpecifics(list[Math.floor(Math.random()*list.length)]);
+      $("#specific-surprise").html('<button id="alc" type="button" name="button"></button>');
+      $("#alc").text(`Or, Random ${ingr} drink`);
+      $("#alc").click(() => {
+        console.log(cocktailList);
+        getSpecifics(cocktailList[Math.floor(Math.random()*cocktailList.length)]);
       });
     });
   });
 
+
+  $("#non-alcoholic-list").click(() => {
+    clearDetails();
+    $("#specific-surprise").empty();
+    $("#cocktail-list").html("<option value=''>CHOOSE A DRINK --</option>");
+    $(".cocktail-list").show();
+    let nonAlcList = new NonAlcoholicList();
+    let promise3 = nonAlcList.getNonAlcoholicList();
+
+    promise3.then((response) => {
+      let body = JSON.parse(response);
+      const nonAlcoholList = nonAlcList.getList(body.drinks);
+      nonAlcoholList.forEach( (drink) => {
+        $("#cocktail-list").append(`<option value="${drink}">${drink}</option>`)
+      });
+      $("#specific-surprise").html('<button id="non-alc" type="button" name="button">Or, Random Non-Alcoholic Drink</button>');
+      $("#non-alc").click(() => {
+        console.log(nonAlcoholList);
+        getSpecifics(nonAlcoholList[Math.floor(Math.random()*nonAlcoholList.length)]);
+      });
+    });
+  });
+
+
   $("#cocktail-list").change((event) => {
     event.preventDefault();
+    clearDetails();
     const drinkName = $("#cocktail-list").val();
     getSpecifics(drinkName);
   });
@@ -66,7 +79,7 @@ function clearDetails() {
   $(".drink-result").hide();
   $(".drink-name").html("");
   $(".drink-image").html("");
-  $(".drink-ingredients").empty();
+  $(".drink-ingredients").html("");
   $(".drink-instructions").html("");
 }
 
@@ -75,7 +88,6 @@ function getSpecifics(drinkName) {
   $(".drink-result").show();
   let drinkDetails = new DrinkDetails();
   let promise = drinkDetails.getDrinkDetails(drinkName);
-  // let name;
 
   promise.then((response) => {
     let body = JSON.parse(response);
