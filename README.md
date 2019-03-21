@@ -28,9 +28,9 @@ Use API to get information and deliver it to the user. Separate business logic f
 * People who like to drink but don't know what to drink
 
 ### User Stories
-**As an** adventurous social drink,<br>
-**I want** _to be able to do something_,<br>
-**So that** _I can achieve a goal_.
+**As an** adventurous social drinker,<br>
+**I want** to try a new drink,<br>
+**So that** I can expand my drinking experience.
 
 ### Product Requirements
 * Let the user enter some search terms
