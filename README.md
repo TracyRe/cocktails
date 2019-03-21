@@ -25,10 +25,10 @@ A website using an API for www.thecocktaildb.com, letting the user select a cock
 Use API to get information and deliver it to the user. Separate business logic from UI logic.
 
 ### Target Audience/Users
-* People who like to party
+* People who like to drink but don't know what to drink
 
 ### User Stories
-**As a** _archetype_,<br>
+**As an** adventurous social drink,<br>
 **I want** _to be able to do something_,<br>
 **So that** _I can achieve a goal_.
 

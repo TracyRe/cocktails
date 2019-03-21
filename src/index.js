@@ -4,19 +4,19 @@ import './scss/styles.scss';
 import { DrinkDetails, DrinkList } from './js/project.js';
 
 $(document).ready(function(){
+  $(".cocktail-list").hide();
 
   const alcohols = ["Absinthe", "Beer", "Blended whiskey", "Bourbon", "Brandy", "Campari", "Cider", "Cognac", "Cointreau", "Crown Royal", "Dark rum", "Gin", "Green Chartreuse", "Irish cream", "Irish whiskey", "Jägermeister", "Kahlua", "Light rum", "Mezcal", "Ouzo", "Pisco", "Port", "Prosecco", "Rum", "Rye whiskey", "Sambuca", "Scotch", "Blended Scotch", "Sloe gin", "Spiced rum", "Tequila", "Vodka", "Whiskey", "Whisky"];
 
-  for(let j = 0; j < alcohols.length; j ++) {
-    $("#alcohol-list").append(`<option value="${alcohols[j]}">${alcohols[j]}</option>`)
-  }
+  alcohols.forEach((booze) => {
+    $("#alcohol-list").append(`<option value="${booze}">${booze}</option>`)
+  });
 
 
 
-  $("#alcohol").submit(function(event){
-    event.preventDefault();
-    $("#cocktail-list").empty();
-    console.log("hello");
+  $("#alcohol-list").change(function(){              $("#cocktail-list").html("<option value=''>CHOOSE A DRINK --</option>");
+    $(".cocktail-list").show();
+
     const ingr = $("#alcohol-list").val();
     let drinkList = new DrinkList();
     let promise2 = drinkList.getDrinkList(ingr);
@@ -24,52 +24,55 @@ $(document).ready(function(){
     promise2.then(function(response) {
       let body = JSON.parse(response);
       const list = drinkList.getList(body.drinks);
+      list.forEach( (drink) => {
+        $("#cocktail-list").append(`<option value="${drink}">${drink}</option>`)
+      });
+      $("#specific-surprise").text(`Random ${ingr} drink`);
       console.log(list);
-      for(let i = 0; i < list.length; i ++) {
-        $("#cocktail-list").append(`<option value="${list[i]}">${list[i]}</option>`)
-      }
+      $("#specific-surprise").click(() => {
+        getSpecifics(list[Math.floor(Math.random()*list.length)]);
+      });
     });
   });
 
-  $("#cocktails").submit(function(event) {
+  $("#cocktail-list").change(function(event) {
     event.preventDefault();
-    $(".drink-name").val("");
-    $(".drink-image").val("");
-    $(".drink-ingredients").val("");
-    $(".drink-instructions").val("");
     const drinkName = $("#cocktail-list").val();
-    let drinkDetails = new DrinkDetails();
-    let promise = drinkDetails.getDrinkDetails(drinkName);
-    // let name;
-
-    promise.then(function(response) {
-      let body = JSON.parse(response);
-      let name = body.drinks[0].strDrink;
-      let image = body.drinks[0].strDrinkThumb;
-      let instructions = body.drinks[0].strInstructions;
-      console.log(body.drinks);
-
-      $(".drink-name").text(name);
-      $(".drink-image").html(`<img src=${image}>`);
-      $(".drink-instructions").text(instructions);
-      $(".drink-results").show();
-
-      // const drinkIngredients = [];
-      // for (let k = 1; k < 16; k++) {
-      //   let spot = `strIngredient${k}`;
-      //   let ingred = body.drinks[0].spot;
-      //   console.log(ingred);
-      //   if (ingred.length > 0) {
-      //     drinkIngredients.push(ingred);
-      //   }
-      // }
-
-
-    });
-
+    getSpecifics(drinkName);
   });
-
 });
+
+function getSpecifics(drinkName) {
+  $(".drink-result").show();
+  $(".drink-name").val("");
+  $(".drink-image").val("");
+  $(".drink-ingredients").empty();
+  $(".drink-instructions").val("");
+  let drinkDetails = new DrinkDetails();
+  let promise = drinkDetails.getDrinkDetails(drinkName);
+  // let name;
+
+  promise.then(function(response) {
+    let body = JSON.parse(response);
+    let name = body.drinks[0].strDrink;
+    let image = body.drinks[0].strDrinkThumb;
+    let instructions = body.drinks[0].strInstructions;
+    console.log(body.drinks);
+
+    $(".drink-name").text(name);
+    $(".drink-image").html(`<img src=${image}>`);
+    $(".drink-instructions").text(instructions);
+
+    for (let i = 1; i < 10; i++) {
+      let ingredients = body.drinks[0][`strIngredient${i}`];
+      let measure = body.drinks[0][`strMeasure${i}`];
+      console.log(ingredients);
+      if (ingredients.length > 0) {
+        $(".drink-ingredients").append(`<li>${measure} ${ingredients}</li>`);
+      }
+    }
+  });
+}
 // value=${alcohols[j]}
 
 
