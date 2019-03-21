@@ -6,7 +6,7 @@ import { DrinkDetails, DrinkList } from './js/project.js';
 $(document).ready(function(){
   $(".cocktail-list").hide();
 
-  const alcohols = ["Absinthe", "Beer", "Blended whiskey", "Bourbon", "Brandy", "Campari", "Cider", "Cognac", "Cointreau", "Crown Royal", "Dark rum", "Gin", "Green Chartreuse", "Irish cream", "Irish whiskey", "Jägermeister", "Kahlua", "Light rum", "Mezcal", "Ouzo", "Pisco", "Port", "Prosecco", "Rum", "Rye whiskey", "Sambuca", "Scotch", "Blended Scotch", "Sloe gin", "Spiced rum", "Tequila", "Vodka", "Whiskey", "Whisky"];
+  const alcohols = ["Absinthe", "Beer", "Bourbon", "Brandy", "Campari", "Cider", "Cognac", "Cointreau", "Gin", "Sloe gin", "Green Chartreuse", "Irish cream", "Jägermeister", "Kahlua", "Mezcal", "Ouzo", "Pisco", "Port", "Prosecco", "Rum", "Dark rum", "Light rum", "Spiced rum", "Sambuca", "Scotch", "Blended Scotch", "Tequila", "Vodka", "Whiskey", "Whisky", "Irish whiskey", "Rye whiskey", "Blended whiskey", "Crown Royal"];
 
   alcohols.forEach((booze) => {
     $("#alcohol-list").append(`<option value="${booze}">${booze}</option>`)

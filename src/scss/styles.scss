@@ -3,9 +3,8 @@
 
 $basefont: 'Barlow Semi Condensed', Helvetica, sans-serif;
 $fancyfont: 'Sail', cursive;
-$textcolor: darkent(#5b1146, 80%);
-$accent: #0FB2D3;
-$accent2: #D1ECE5;
+$textcolor: darken(#5b1146, 80%);
+$reversecolor: #ffffff;
 $bgcolor-page: #5b1146;
 $bgcolor-gradient: #fcdb6f;
 $bgcolor-nav: #ffffff;
@@ -97,10 +96,13 @@ h1, h2 {
 }
 
 h1 {
-  font-size: 6rem;
+  font-size: 5rem;
   color: $bgcolor-page;
   text-align: center;
   text-shadow: 2px 2px 0px lighten($bgcolor-gradient, 20%);
+  @include desktop {
+    margin: 0 0 2rem 0;
+  };
 }
 
 h2 {
@@ -109,18 +111,25 @@ h2 {
   line-height: 95%;
 }
 
-p, select {
-  font-size: 1rem;
+p, select, option {
+  font: {
+    family: $basefont;
+    size: 1rem;
+  }
   margin: 0 0 1rem 0;
   color: #333;
   line-height: 140%;
+}
+
+select {
+  @include border(1px, lighten($bgcolor-page, 40%));
 }
 
 
 .content {
   @include cushion(1rem 0, 0 auto 1rem auto);
   @include size(70%, 100%);
-  @include min-max-width(400px, 1000px);
+  @include min-max-width(280px, 1000px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -128,12 +137,12 @@ p, select {
 
 
 a {
-  color: $accent;
+  // color: $accent;
   text-decoration: none;
 }
 
 a:hover, a:active {
-  color: lighten($accent, 10%);
+  // color: lighten($accent, 10%);
 }
 
 
@@ -163,7 +172,18 @@ ul {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-
+  p {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: $reversecolor;
+    margin-bottom: 0;
+  }
+  select {
+    margin-bottom: 0;
+  }
+  button {
+    margin-top: 0;
+  }
 }
 
 .drink-image {
@@ -179,7 +199,7 @@ ul {
 
 
 .drink-result {
-  @include cushion(.25rem 1rem 1rem 1rem, 2rem 0);
+  @include cushion(.25rem 1rem 0rem 1rem, 2rem 0);
   border-radius: 8px;
   background: rgba(255, 255, 255, .45);
   box-shadow: 0 0 30px #fff;
