@@ -1,9 +1,7 @@
 # Cocktails
 
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9a1cffa2-f640-4487-ab2a-5d5fc152400f/deploy-status)](https://app.netlify.com/sites/cocktail-api/deploys)
-
-Deployed at https://cocktail-api.netlify.com
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9a1cffa2-f640-4487-ab2a-5d5fc152400f/deploy-status)](https://app.netlify.com/sites/cocktail-api/deploys) Deployed at https://cocktail-api.netlify.com
 
 #### API project for Epicodus
 
