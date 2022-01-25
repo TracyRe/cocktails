@@ -6,7 +6,7 @@
 #### API project for Epicodus
 
 _Published_ **March 20 2019**<br>
-_Authors_ **Tracy Reith** and **Kim McConnell**
+_Authors_ **Tracy Reith** and **Evan McConnell**
 
 1. [Description](#description)
 1. [Learning Objective](#learning-objective)
