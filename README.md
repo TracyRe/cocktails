@@ -78,4 +78,4 @@ From cocktail details, display name, photo, ingredients, and instructions | Marg
 ### License
 [MIT](./LICENSE.txt)
 
-Copyright (c) 2019 Tracy Reith and Kim McConnell
+Copyright (c) 2019 Tracy Reith and Evan McConnell
